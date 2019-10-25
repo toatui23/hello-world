@@ -36,12 +36,22 @@ public class Game {
     }
 
     public void remove(int columnNumber) {
-        // remove the top card from the indicated column
+        // co
+        Java.util.List<Card> target = cols.get(columnNumber);
+        // don't do anything if column is empty
+        if(target.isEmpty()){ return; }
+
+        //see if this card is removable
+        // first loop through list
     }
 
     private boolean columnHasCards(int columnNumber) {
         // check indicated column for number of cards; if no cards return false, otherwise return true
-        return false;
+        Java.util.List<Card> target = cols.get(columnNumber);
+        // don't do anything if column is empty
+        if(target.isEmpty()){ return false; }
+
+        return true;
     }
 
     private Card getTopCard(int columnNumber) {
