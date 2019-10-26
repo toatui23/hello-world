@@ -37,7 +37,7 @@ public class Game {
 
     public void remove(int columnNumber) {
         // co
-        Java.util.List<Card> target = cols.get(columnNumber);
+        java.util.List<Card> target = cols.get(columnNumber);
         // don't do anything if column is empty
         if(target.isEmpty()){ return; }
 
@@ -47,7 +47,7 @@ public class Game {
 
     private boolean columnHasCards(int columnNumber) {
         // check indicated column for number of cards; if no cards return false, otherwise return true
-        Java.util.List<Card> target = cols.get(columnNumber);
+        java.util.List<Card> target = cols.get(columnNumber);
         // don't do anything if column is empty
         if(target.isEmpty()){ return false; }
 
