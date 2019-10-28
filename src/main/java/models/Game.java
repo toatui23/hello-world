@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.util.function.IntFunction;
 
 /**
  * Assignment 1: Each of the blank methods below require implementation to get AcesUp to build/run
@@ -33,6 +34,13 @@ public class Game {
 
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
+        //test:
+        System.out.println("Deal Called");
+        Card cardMoved = this.deck.get(0);
+
+        java.util.List<Card> colOne = cols.get(0);
+
+        colOne.add( cardMoved );
     }
 
     public void remove(int columnNumber) {
@@ -60,7 +68,19 @@ public class Game {
 
 
     public void move(int columnFrom, int columnTo) {
-        // remove the top card from the columnFrom column, add it to the columnTo column
+        // remove the top card from the columnFrom column, add it to the columnTio column
+
+		if(columnHasCards(columnTo)){ return; } //Should return if columnTo is not empty
+        if(! columnHasCards(columnFrom)){ return; } // Should return columnFrom is empty
+
+        Card cardMoved =  getTopCard(columnFrom);
+
+		remove(columnFrom);
+
+        java.util.List<Card> colunm_to = cols.get(columnTo);
+
+        colunm_to.add( cardMoved );
+
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {
