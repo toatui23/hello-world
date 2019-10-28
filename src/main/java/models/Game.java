@@ -28,6 +28,7 @@ public class Game {
     }
 
     public void shuffle() {
+        //Function shuffles the 'deck' list
         Collections.shuffle(deck);
     }
 
