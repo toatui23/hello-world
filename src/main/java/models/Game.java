@@ -34,13 +34,6 @@ public class Game {
 
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
-        //test:
-        System.out.println("Deal Called");
-        Card cardMoved = this.deck.get(0);
-
-        java.util.List<Card> colOne = cols.get(0);
-
-        colOne.add( cardMoved );
     }
 
     public void remove(int columnNumber) {
