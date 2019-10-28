@@ -25,6 +25,7 @@ public class Game {
             deck.add(new Card(i,Suit.Diamonds));
             deck.add(new Card(i,Suit.Spades));
         }
+
     }
 
     public void shuffle() {
@@ -33,21 +34,39 @@ public class Game {
 
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
+        addCardToCol(0, deck.get(0));
     }
 
-    public void remove(int columnNumber) {
-        // co
-        java.util.List<Card> target = cols.get(columnNumber);
-        // don't do anything if column is empty
-        if(target.isEmpty()){ return; }
 
-        //see if this card is removable
-        // first loop through list
+
+    public void remove(int columnNumber) {
+
+        // check if there are any cards to remove
+        if( columnHasCards(columnNumber)) { return; }
+
+        Card target = getTopCard(columnNumber);
+        /**for(int i = 0; i < 4; i++) {
+            if(i != columnNumber){
+
+                Card index = getTopCard(i);
+
+                if(target.getSuit() == index.getSuit()){
+                    if(target.getValue() > index.getValue()){
+                        return;
+                    }
+                }
+
+            }
+         }**/
+
+        System.out.println(target.toString());
+        removeCardFromCol(columnNumber);
+
     }
 
     private boolean columnHasCards(int columnNumber) {
         // check indicated column for number of cards; if no cards return false, otherwise return true
-        java.util.List<Card> target = cols.get(columnNumber);
+        java.util.List<Card> target = this.cols.get(columnNumber);
         // don't do anything if column is empty
         if(target.isEmpty()){ return false; }
 
