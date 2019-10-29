@@ -19,6 +19,7 @@ public class Game {
         for(int i = 0; i < 4; i++){
             cols.add(new ArrayList<Card>());
         }
+
     }
 
     public void buildDeck() {
@@ -33,6 +34,7 @@ public class Game {
 
     public void shuffle() {
         // shuffles the deck so that it is random
+
     }
 
     public void dealFour() {
@@ -41,20 +43,40 @@ public class Game {
           addCardToCol(i, deck.get(deck.size() - 1));
           deck.remove(deck.size()-1);
         }
+        addCardToCol(0, new Card(2, Suit.Clubs));
     }
 
 
 
     public void remove(int columnNumber) {
-
+        int col = columnNumber;
         // check if there are any cards to remove
-        if( columnHasCards(columnNumber)) { return; }
+        if( !columnHasCards(col)) { return; }
 
-        Card target = getTopCard(columnNumber);
+        Card target = getTopCard(col);
+        Card index = getTopCard(0);
+        // also check for pairs
         for(int i = 0; i < 4; i++) {
-            if(i != columnNumber){
+            if(!columnHasCards(i)){ return; }
+            if(i != col){
 
-                Card index = getTopCard(i);
+                index = getTopCard(i);
+
+                if(target.getSuit() == index.getSuit()){
+                    break;
+                }
+
+            }
+         }
+        if(target.getSuit() != index.getSuit()){
+            return;
+        }
+
+        for(int i = 0; i < 4; i++) {
+            if(!columnHasCards(i)){ return; }
+            if(i != col){
+
+                index = getTopCard(i);
 
                 if(target.getSuit() == index.getSuit()){
                     if(target.getValue() > index.getValue()){
@@ -63,9 +85,9 @@ public class Game {
                 }
 
             }
-         }
+        }
 
-        System.out.println(target.toString());
+
         removeCardFromCol(columnNumber);
 
     }
