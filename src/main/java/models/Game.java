@@ -32,8 +32,8 @@ public class Game {
     }
 
     public void shuffle() {
-        // shuffles the deck so that it is random
-
+        //Function shuffles the 'deck' list
+        Collections.shuffle(deck);
     }
 
     public void dealFour() {
