@@ -16,8 +16,8 @@ public class Game {
 
     public Game(){
         // initialize a new game such that each column can store cards
-        for(java.util.List<Card> columns: cols){
-            columns.
+        for(int i = 0; i < 4; i++){
+            cols.add(new ArrayList<Card>());
         }
     }
 
@@ -28,6 +28,7 @@ public class Game {
             deck.add(new Card(i,Suit.Diamonds));
             deck.add(new Card(i,Suit.Spades));
         }
+
     }
 
     public void shuffle() {
