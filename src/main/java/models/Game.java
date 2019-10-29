@@ -19,7 +19,6 @@ public class Game {
         for(int i = 0; i < 4; i++){
             cols.add(new ArrayList<Card>());
         }
-
     }
 
     public void buildDeck() {
