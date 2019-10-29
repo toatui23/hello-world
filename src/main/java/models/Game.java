@@ -34,7 +34,6 @@ public class Game {
 
     public void dealFour() {
         // remove the top card from the deck and add it to a column; repeat for each of the four columns
-        addCardToCol(0, deck.get(0));
     }
 
 
@@ -45,7 +44,7 @@ public class Game {
         if( columnHasCards(columnNumber)) { return; }
 
         Card target = getTopCard(columnNumber);
-        /**for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 4; i++) {
             if(i != columnNumber){
 
                 Card index = getTopCard(i);
@@ -57,7 +56,7 @@ public class Game {
                 }
 
             }
-         }**/
+         }
 
         System.out.println(target.toString());
         removeCardFromCol(columnNumber);
