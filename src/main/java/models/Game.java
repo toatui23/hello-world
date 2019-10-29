@@ -42,7 +42,6 @@ public class Game {
           addCardToCol(i, deck.get(deck.size() - 1));
           deck.remove(deck.size()-1);
         }
-        addCardToCol(0, new Card(2, Suit.Clubs));
     }
 
 
