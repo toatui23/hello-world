@@ -16,6 +16,9 @@ public class Game {
 
     public Game(){
         // initialize a new game such that each column can store cards
+        for(int i = 0; i < 4; i++){
+            cols.add(new ArrayList<Card>());
+        }
     }
 
     public void buildDeck() {
@@ -25,6 +28,7 @@ public class Game {
             deck.add(new Card(i,Suit.Diamonds));
             deck.add(new Card(i,Suit.Spades));
         }
+
     }
 
     public void shuffle() {
