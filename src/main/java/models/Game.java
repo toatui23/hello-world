@@ -108,17 +108,6 @@ public class Game {
 
     public void move(int columnFrom, int columnTo) {
         // remove the top card from the columnFrom column, add it to the columnTo column
-
-        if(columnHasCards(columnTo)){ return; } //Should return if columnTo is not empty
-        if(! columnHasCards(columnFrom)){ return; } // Should return columnFrom is empty
-
-        Card cardMoved =  getTopCard(columnFrom);
-
-        remove(columnFrom);
-
-        java.util.List<Card> colunm_to = cols.get(columnTo);
-
-        colunm_to.add( cardMoved );
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {
