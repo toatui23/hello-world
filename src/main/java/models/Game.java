@@ -111,7 +111,7 @@ public class Game {
 
         Card cardMoved =  getTopCard(columnFrom);
 
-        remove(columnFrom);
+        removeCardFromCol(columnFrom);
 
         java.util.List<Card> colunm_to = cols.get(columnTo);
 
