@@ -22,9 +22,6 @@ import ninja.Router;
 import ninja.application.ApplicationRoutes;
 import controllers.ApplicationController;
 
-/**
- * Assignment 1: No changes are needed in this file, but it is good to be aware of the routes for future assignments.
- */
 public class Routes implements ApplicationRoutes {
 
     @Override

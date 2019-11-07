@@ -24,6 +24,7 @@ import ninja.Results;
 import com.google.inject.Singleton;
 import ninja.params.PathParam;
 
+
 @Singleton
 public class ApplicationController {
 
@@ -49,12 +50,12 @@ public class ApplicationController {
 
     public Result removeCard(Context context, @PathParam("column") int colNumber, Game g){
         g.remove(colNumber);
-        return Results.json().render(g);
+        return  Results.json().render(g);
     }
 
     public Result moveCard(Context context, @PathParam("columnFrom") int colFrom, @PathParam("columnTo") int colTo, Game g){
         g.move(colFrom,colTo);
-        return Results.json().render(g);
+        return  Results.json().render(g);
     }
 
 }

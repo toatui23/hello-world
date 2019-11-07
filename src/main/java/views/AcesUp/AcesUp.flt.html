@@ -122,7 +122,6 @@ $( '.columnOfCards .cardLocation' ).html("");
 
 }
 
-// Calls ApplicationController.gameGet()
 $.getJSON("http://localhost:8080/game", function( data ) {
 display(data);
 game = data;

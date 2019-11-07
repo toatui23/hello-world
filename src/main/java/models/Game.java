@@ -5,20 +5,23 @@ import java.util.Collections;
 import java.util.Random;
 
 /**
- * Assignment 1: Each of the blank methods below require implementation to get AcesUp to build/run
+ * Assignment 1: Students must implement dealFour(), remove(), move(), and columnHasCards() methods
+ *
+ * The customDeal() method is not present in the Assignment1_Student version since tests (and the test dir) are removed
+ * to prevent confusion regarding testing and the use of unit tests; testing is covered more thoroughly in CS362.
  */
 public class Game {
 
     public java.util.List<Card> deck = new ArrayList<>();
 
-    public java.util.List<java.util.List<Card>> cols = new ArrayList<>(4);
+    public java.util.List<java.util.List<Card>> cols = new ArrayList<>();
 
 
     public Game(){
-        // initialize a new game such that each column can store cards
-        for(int i = 0; i < 4; i++){
-            cols.add(new ArrayList<Card>());
-        }
+        cols.add(new ArrayList<Card>());
+        cols.add(new ArrayList<Card>());
+        cols.add(new ArrayList<Card>());
+        cols.add(new ArrayList<Card>());
     }
 
     public void buildDeck() {
@@ -28,75 +31,59 @@ public class Game {
             deck.add(new Card(i,Suit.Diamonds));
             deck.add(new Card(i,Suit.Spades));
         }
-
     }
 
     public void shuffle() {
-        //Function shuffles the 'deck' list
-        Collections.shuffle(deck);
+        long seed = System.nanoTime();
+        Collections.shuffle(deck, new Random(seed));
     }
 
     public void dealFour() {
-        // remove the top card from the deck and add it to a column; repeat for each of the four columns
-        for (int i = 0;i < 4 ;i++) {
-          addCardToCol(i, deck.get(deck.size() - 1));
-          deck.remove(deck.size()-1);
+        for(int i = 0; i < 4; i++){
+            cols.get(i).add(deck.get(deck.size()-1));
+            deck.remove(deck.size()-1);
         }
     }
 
-
+    //customDeal to setup game for testing purposes
+    public void customDeal(int c1, int c2, int c3, int c4) {
+        cols.get(0).add(deck.get(c1));
+        deck.remove(c1);
+        cols.get(1).add(deck.get(c2));
+        deck.remove(c2);
+        cols.get(2).add(deck.get(c3));
+        deck.remove(c3);
+        cols.get(3).add(deck.get(c4));
+        deck.remove(c4);
+    }
 
     public void remove(int columnNumber) {
-        int col = columnNumber;
-        // check if there are any cards to remove
-        if( !columnHasCards(col)) { return; }
-
-        Card target = getTopCard(col);
-        Card index = getTopCard(0);
-        // also check for pairs
-        for(int i = 0; i < 4; i++) {
-            if(!columnHasCards(i)){ return; }
-            if(i != col){
-
-                index = getTopCard(i);
-
-                if(target.getSuit() == index.getSuit()){
-                    break;
-                }
-
-            }
-         }
-        if(target.getSuit() != index.getSuit()){
-            return;
-        }
-
-        for(int i = 0; i < 4; i++) {
-            if(!columnHasCards(i)){ return; }
-            if(i != col){
-
-                index = getTopCard(i);
-
-                if(target.getSuit() == index.getSuit()){
-                    if(target.getValue() > index.getValue()){
-                        return;
+        if(columnHasCards(columnNumber)) {
+            Card c = getTopCard(columnNumber);
+            boolean removeCard = false;
+            for (int i = 0; i < 4; i++) {
+                if (i != columnNumber) {
+                    if (columnHasCards(i)) {
+                        Card compare = getTopCard(i);
+                        if (compare.getSuit() == c.getSuit()) {
+                            if (compare.getValue() > c.getValue()) {
+                                removeCard = true;
+                            }
+                        }
                     }
                 }
-
+            }
+            if (removeCard) {
+                this.cols.get(columnNumber).remove(this.cols.get(columnNumber).size() - 1);
             }
         }
-
-
-        removeCardFromCol(columnNumber);
-
     }
 
     private boolean columnHasCards(int columnNumber) {
-        // check indicated column for number of cards; if no cards return false, otherwise return true
-        java.util.List<Card> target = this.cols.get(columnNumber);
-        // don't do anything if column is empty
-        if(target.isEmpty()){ return false; }
-
-        return true;
+        if(this.cols.get(columnNumber).size()>0){
+            return true;
+        }
+        return false;
     }
 
     private Card getTopCard(int columnNumber) {
@@ -105,17 +92,9 @@ public class Game {
 
 
     public void move(int columnFrom, int columnTo) {
-        // remove the top card from the columnFrom column, add it to the columnTo column
-        if(columnHasCards(columnTo)){ return; } //Should return if columnTo is not empty
-        if(! columnHasCards(columnFrom)){ return; } // Should return columnFrom is empty
-
-        Card cardMoved =  getTopCard(columnFrom);
-
-        removeCardFromCol(columnFrom);
-
-        java.util.List<Card> colunm_to = cols.get(columnTo);
-
-        colunm_to.add( cardMoved );
+        Card cardToMove = getTopCard(columnFrom);
+        this.removeCardFromCol(columnFrom);
+        this.addCardToCol(columnTo,cardToMove);
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {
